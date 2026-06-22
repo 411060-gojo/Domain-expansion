@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="zh-TW">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Route Cycler — 路線估算器</title>
+  <link rel="stylesheet" href="styles.css" />
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet.draw/1.0.4/leaflet.draw.css" />
+  <style>
+    body, html { height: 100%; margin: 0; font-family: Arial, Helvetica, sans-serif; }
+    #map { position: absolute; top: 0; right: 0; bottom: 0; left: 320px; }
+    #sidebar { position: absolute; left: 0; top: 0; bottom: 0; width: 320px; padding: 16px; box-sizing: border-box; background: #fafafa; border-right:1px solid #ddd; overflow:auto; }
+    #sidebar h1{ margin:6px 0 12px 0; font-size:18px }
+    #stats { margin-top:12px; padding:8px; background:#fff; border:1px solid #eee }
+    label{ display:block; margin:8px 0 }
+    input[type="text"], input[type="password"]{ width:100%; box-sizing:border-box; padding:6px }
+    button{ margin-right:6px }
+    .muted{ color:#666; font-size:13px }
+  </style>
+</head>
+<body>
+  <div id="sidebar">
+    <h1>Route Cycler</h1>
+    <div>
+      <label>OpenWeatherMap API Key
+        <input id="owmKey" type="text" placeholder="填入 OpenWeatherMap API Key（取得天氣/風）" />
+      </label>
+      <div style="margin-top:6px">
+        <button id="btnWeather">取得天氣與風向</button>
+        <button id="btnClear">清除路線</button>
+      </div>
+    </div>
+    <div id="stats">
+      <div><strong>距離</strong>: <span id="distance">—</span></div>
+      <div><strong>海拔上升總和</strong>: <span id="elevation">—</span></div>
+      <div><strong>天氣</strong>: <span id="weather">—</span></div>
+      <div><strong>風速 / 風向</strong>: <span id="wind">—</span></div>
+    </div>
+    <p class="muted">使用左側工具在地圖上繪製路線（折線）。系統會計算距離、查詢海拔（Open-Elevation），並使用 OpenWeatherMap 提供天氣與風向（需 API Key）。</p>
+    <hr />
+    <p><strong>提示</strong>: 若要更精細，請把路線分段或加入更多點。</p>
+  </div>
+  <div id="map"></div>
+
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet.draw/1.0.4/leaflet.draw.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
